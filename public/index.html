@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Haml Coffee Online</title>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.1/coffee-script.min.js'></script>
+    <script src='https://raw.github.com/netzpirat/haml-coffee/master/dist/compiler/hamlcoffee.min.js'></script>
+    <script src='/javascripts/application.js'></script>
+    <link href='/stylesheets/application.css' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <div id='container'>
+      <header>
+        <h1>Haml Coffee Online</h1>
+        <p>
+          Hi! I'm
+          <a href='https://github.com/netzpirat/haml-coffee'>Haml-Coffee</a>,
+          a JavaScript templating solution that implements
+          <a href='http://haml.info/'>Haml</a>
+          with
+          <a href='http://coffeescript.org/'>CoffeeScript</a>
+          for its logic. I run on the server side on
+          <a href='http://nodejs.org/'>Node.js</a>
+          and also in the Browser. You can use me with
+          <a href='https://github.com/netzpirat/haml_coffee_assets'>Haml Coffee Assets</a>
+          also with
+          <a href='http://rubyonrails.org/'>Ruby on Rails</a>
+          or any framework that supports
+          <a href='https://github.com/sstephenson/sprockets'>Sprockets</a>
+          like
+          <a href='http://www.sinatrarb.com/'>Sinatra</a>.
+        </p>
+        <p>
+          You can load some predefined examples to see it in action:
+          <select id='examples'></select>
+        </p>
+      </header>
+      <fieldset id='options'>
+        <legend>Options</legend>
+        <ul>
+          <li>
+            <input checked='checked' id='escapeHtml' type='checkbox' />
+            <label for='escapeHtml'>Escape HTML</label>
+          </li>
+          <li>
+            <input checked='checked' id='escapeAttributes' type='checkbox' />
+            <label for='escapeAttributes'>Escape attributes</label>
+          </li>
+          <li>
+            <input checked='checked' id='cleanValue' type='checkbox' />
+            <label for='cleanValue'>Clean values</label>
+          </li>
+          <li>
+            <input id='uglify' type='checkbox' />
+            <label for='uglify'>Uglify</label>
+          </li>
+          <li>
+            <input id='extendScope' type='checkbox' />
+            <label for='extendScope'>Extend scope</label>
+          </li>
+          <li>
+            <label for='format'>Format</label>
+            <select id='format'>
+              <option>html5</option>
+              <option>html4</option>
+              <option>xhtml</option>
+            </select>
+          </li>
+        </ul>
+      </fieldset>
+      <div id='input'>
+        <div id='left'>
+          <label for='template'>Template</label>
+          <textarea id='template'></textarea>
+        </div>
+        <div id='right'>
+          <label for='data'>Data</label>
+          <textarea id='data'></textarea>
+        </div>
+        <button id='render'>Render template</button>
+      </div>
+      <div id='output'>
+        <label for='result'>Result</label>
+        <textarea id='result'></textarea>
+      </div>
+      <footer>
+        Haml Coffee is developed by
+        <a href='https://mksoft.ch'>Michael Kessler</a>
+        (<a href='http://twitter.com/netzpirat/'>@netzpirat</a>)
+        &#10025;
+        Report bugs on
+        <a href='https://github.com/netzpirat/haml-coffee/issues'>GitHub Issues</a>.
+        &#10025;
+        This website is
+        <a href='https://github.com/netzpirat/haml-coffee-online'>Open Source</a>.
+      </footer>
+    </div>
+  </body>
+</html>
