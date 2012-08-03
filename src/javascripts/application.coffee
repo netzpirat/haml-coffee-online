@@ -26,25 +26,34 @@ $(document).ready ->
       })
 
       compiler.parse $('#template').val()
-    catch e
-      $('#result').val "Error parsing emplate: #{ e.message }"
 
-    try
-      template = new Function CoffeeScript.compile(compiler.precompile(), bare: true)
-    catch e
-      $('#result').val "Error compiling template: #{ e.message }"
+      try
+        template = new Function CoffeeScript.compile(compiler.precompile(), bare: true)
 
-    try
-      data = CoffeeScript.eval($('#data').val())
-    catch e
-      $('#result').val "Error evaluating data: #{ e.message }"
+        try
+          data = CoffeeScript.eval($('#data').val())
 
-    try
-      result = template.call data
-      $('#result').val result
+          try
+            result = template.call data
+            $('#result').val result
+      
+          catch e
+            $('#result').val "Error render template: #{ e.message }"
+
+        catch e
+          $('#result').val "Error evaluating data: #{ e.message }"
+
+      catch e
+        $('#result').val """
+      Error compiling template: #{ e.message }
+      
+      CoffeeScript template source code:
+      ----------------------------------
+      #{ compiler.precompile() }      
+        """
 
     catch e
-      $('#result').val "Error render template: #{ e.message }"
+      $('#result').val "Error parsing emplate: #{ e }"
 
 window.EXAMPLES = [
   {

@@ -37,26 +37,26 @@
           format: $('#format').val()
         });
         compiler.parse($('#template').val());
+        try {
+          template = new Function(CoffeeScript.compile(compiler.precompile(), {
+            bare: true
+          }));
+          try {
+            data = CoffeeScript["eval"]($('#data').val());
+            try {
+              result = template.call(data);
+              return $('#result').val(result);
+            } catch (e) {
+              return $('#result').val("Error render template: " + e.message);
+            }
+          } catch (e) {
+            return $('#result').val("Error evaluating data: " + e.message);
+          }
+        } catch (e) {
+          return $('#result').val("Error compiling template: " + e.message + "\n\nCoffeeScript template source code:\n----------------------------------\n" + (compiler.precompile()) + "      ");
+        }
       } catch (e) {
-        $('#result').val("Error parsing emplate: " + e.message);
-      }
-      try {
-        template = new Function(CoffeeScript.compile(compiler.precompile(), {
-          bare: true
-        }));
-      } catch (e) {
-        $('#result').val("Error compiling template: " + e.message);
-      }
-      try {
-        data = CoffeeScript["eval"]($('#data').val());
-      } catch (e) {
-        $('#result').val("Error evaluating data: " + e.message);
-      }
-      try {
-        result = template.call(data);
-        return $('#result').val(result);
-      } catch (e) {
-        return $('#result').val("Error render template: " + e.message);
+        return $('#result').val("Error parsing emplate: " + e);
       }
     });
   });
