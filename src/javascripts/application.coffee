@@ -1,5 +1,6 @@
 $(document).ready ->
-
+  Compiler = require('./haml-coffee')
+  
   select = $('#examples')
 
   for example in window.EXAMPLES
@@ -13,9 +14,11 @@ $(document).ready ->
 
   select.trigger 'change'
 
+  $('.hamlcoffee-version').append(Compiler.VERSION)
+  $('.coffeescript-version').append(CoffeeScript.VERSION + '.')
+  
   $('#render').click ->
     try
-      Compiler = require('./haml-coffee')
       compiler = new Compiler({
         escapeHtml: $('#escapeHtml').is(':checked')
         escapeAttributes: $('#escapeAttributes').is(':checked')

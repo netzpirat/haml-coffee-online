@@ -62,6 +62,12 @@
             %a{ href: 'http://www.sinatrarb.com/'} Sinatra
 
         %p
+          The input will be rendered with Haml Coffee
+          %span.hamlcoffee-version
+          and CoffeeScript
+          %span.coffeescript-version
+            
+        %p
           You can load some predefined examples to see it in action:
           %select#examples
 
@@ -98,7 +104,7 @@
         #right
           %label{ for: 'data' } Data
           %textarea#data
-
+                     
         %button#render Render template
 
       #output

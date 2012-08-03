@@ -1,7 +1,8 @@
 (function() {
 
   $(document).ready(function() {
-    var example, select, _i, _len, _ref;
+    var Compiler, example, select, _i, _len, _ref;
+    Compiler = require('./haml-coffee');
     select = $('#examples');
     _ref = window.EXAMPLES;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -24,10 +25,11 @@
       return _results;
     });
     select.trigger('change');
+    $('.hamlcoffee-version').append(Compiler.VERSION);
+    $('.coffeescript-version').append(CoffeeScript.VERSION + '.');
     return $('#render').click(function() {
-      var Compiler, compiler, data, result, template;
+      var compiler, data, result, template;
       try {
-        Compiler = require('./haml-coffee');
         compiler = new Compiler({
           escapeHtml: $('#escapeHtml').is(':checked'),
           escapeAttributes: $('#escapeAttributes').is(':checked'),
