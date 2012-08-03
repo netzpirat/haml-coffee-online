@@ -1,7 +1,16 @@
 !!!
-%html
+%html{ lang: 'en' }
   %head
     %title Haml Coffee Online
+
+    %meta{ charset: 'utf-8' }
+    %meta{ :content => 'de', 'http-equiv' => 'content-language' }
+    %meta{ content: '3 days', name: 'revisit-after' }
+
+    %meta{ charset: 'Try Haml Coffee Online in your Browser', name: 'description' }
+    %meta{ charset: 'Haml, CoffeeScript, Template, JavaScript, JST', name: 'keywords' }
+    %meta{ charset: 'Michael Kessler', name: 'author' }
+
     %script{ src: 'http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js' }
     %script{ src: 'http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.1/coffee-script.min.js' }
     %script{ src: 'https://raw.github.com/netzpirat/haml-coffee/master/dist/compiler/hamlcoffee.min.js' }
