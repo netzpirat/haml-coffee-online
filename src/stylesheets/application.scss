@@ -18,19 +18,25 @@ body {
 }
 
 header {
+  img {
+    float: left;
+    padding-bottom: 25px;
+  }
+
   h1 {
     margin: 0;
-    font-size: 48px;
+    font-size: 70px;
     margin-top: 25px;
   }
 }
 
 textarea {
-  height: 250px;
+  height: 300px;
   border: 1px solid black;
 }
 
 fieldset {
+  clear: left;
   border: 1px solid black;
 }
 
@@ -90,7 +96,7 @@ ul {
 
 footer {
   margin-top: 25px;
-  padding-bottom: 5px;
+  padding-bottom: 25px;
   font-size: 16px;
 }
 

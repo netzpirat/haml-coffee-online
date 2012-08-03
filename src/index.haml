@@ -21,6 +21,9 @@
     %link{ href: 'http://fonts.googleapis.com/css?family=PT+Sans+Narrow', rel: 'stylesheet', type: 'text/css' }
     %link{ href: 'http://fonts.googleapis.com/css?family=Droid+Sans+Mono', rel: 'stylesheet', type: 'text/css' }
 
+    %link{ :rel => 'shortcut icon', :href => 'http://haml-coffee-online.herokuapp.com/assets/favicon.ico' }
+    %link{ :rel => 'icon', :href => 'http://haml-coffee-online.herokuapp.com/assets/favicon.png', :type => 'image/png' }
+
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-33850664-1']);
@@ -35,6 +38,8 @@
   %body
     #container
       %header
+        %img{ src: '/images/coffee_machine.png', alt: 'Haml Coffee Online', width: '256px', height: '256px' }
+
         %h1 Haml Coffee Online
         %p
           Hi! I'm
@@ -105,11 +110,21 @@
         %a{ href: 'https://mksoft.ch' } Michael Kessler
         = surround '(', ')' do
           %a{ href: 'http://twitter.com/netzpirat/' } @netzpirat
+
         &#10025;
+
         Report bugs on
         = succeed '.' do
           %a{ href: 'https://github.com/netzpirat/haml-coffee/issues'} GitHub Issues
+
         &#10025;
+
         This website is
         = succeed '.' do
           %a{ href: 'https://github.com/netzpirat/haml-coffee-online'} Open Source
+
+        &#10025;
+
+        Icon copyrighted by
+        = succeed '.' do
+          %a{ href: 'http://www.incors.com/company/'} incors
