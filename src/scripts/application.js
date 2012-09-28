@@ -139,6 +139,8 @@
         html = hamlcTemplate.call(dataSource);
         result.setValue(html);
         result.clearSelection();
+        result.gotoLine(1);
+        result.getSession().setScrollTop(0);
         return $('#output').removeClass('hidden');
       } catch (e) {
         result.setValue("Error render template: " + e.message);

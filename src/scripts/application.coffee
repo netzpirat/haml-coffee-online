@@ -147,6 +147,8 @@ $(document).ready ->
       html = hamlcTemplate.call dataSource
       result.setValue html
       result.clearSelection()
+      result.gotoLine 1
+      result.getSession().setScrollTop 0
 
       $('#output').removeClass 'hidden'
 
