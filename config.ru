@@ -1,6 +1,14 @@
 use Rack::Static,
-  :urls => ['/stylesheets', '/javascripts', '/images'],
+  :urls => ['/assets', '/images'],
   :root => 'public'
+
+map '/worker-coffee.js' do
+  run Rack::File.new('vendor/scripts/ace/worker-coffee.js')
+end
+
+map '/worker-javascript.js' do
+  run Rack::File.new('vendor/scripts/ace/worker-javascript.js')
+end
 
 run lambda { |env|
   [

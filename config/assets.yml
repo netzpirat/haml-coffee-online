@@ -1,0 +1,22 @@
+javascript_compressor: closure
+
+embed_assets: off
+compress_assets: on
+gzip_assets: off
+
+javascripts:
+  application:
+    - vendor/scripts/jquery.js
+    - vendor/scripts/ace/ace.js
+    - vendor/scripts/ace/mode-coffee.js
+    - vendor/scripts/ace/mode-html.js
+    - vendor/scripts/ace/mode-javascript.js
+    - vendor/scripts/ace/theme-github.js
+    - vendor/scripts/select2.js
+    - src/scripts/application.js
+
+stylesheets:
+  application:
+    - vendor/styles/animate.css
+    - vendor/styles/select2.css
+    - src/styles/application.css

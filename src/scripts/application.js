@@ -1,7 +1,48 @@
 (function() {
 
   $(document).ready(function() {
-    var Compiler, example, select, _i, _len, _ref;
+    var Compiler, cst, data, example, jst, result, select, template, _i, _len, _ref,
+      _this = this;
+    $('#examples').select2({
+      width: '300px'
+    });
+    $('#format').select2({
+      width: '100px'
+    });
+    template = ace.edit('template');
+    template.setTheme('ace/theme/github');
+    template.getSession().setMode('ace/mode/coffee');
+    template.getSession().setUseWrapMode(true);
+    template.getSession().setTabSize(2);
+    template.getSession().setUseWorker(false);
+    data = ace.edit('data');
+    data.setTheme('ace/theme/github');
+    data.getSession().setMode('ace/mode/coffee');
+    data.getSession().setUseWrapMode(true);
+    data.getSession().setTabSize(2);
+    data.getSession().setUseWorker(false);
+    cst = ace.edit('cst');
+    cst.setTheme('ace/theme/github');
+    cst.getSession().setMode('ace/mode/coffee');
+    cst.setReadOnly(true);
+    cst.getSession().setUseWrapMode(true);
+    cst.getSession().setTabSize(2);
+    cst.getSession().setUseWorker(false);
+    jst = ace.edit('jst');
+    jst.setTheme('ace/theme/github');
+    jst.getSession().setMode('ace/mode/javascript');
+    jst.setReadOnly(true);
+    jst.getSession().setUseWrapMode(true);
+    jst.getSession().setTabSize(2);
+    jst.getSession().setUseWorker(false);
+    result = ace.edit('result');
+    result.setTheme('ace/theme/github');
+    result.getSession().setMode('ace/mode/html');
+    result.setReadOnly(true);
+    result.setShowPrintMargin(false);
+    result.getSession().setUseWrapMode(true);
+    result.getSession().setTabSize(2);
+    result.getSession().setUseWorker(false);
     Compiler = require('./haml-coffee');
     select = $('#examples');
     _ref = window.EXAMPLES;
@@ -9,15 +50,26 @@
       example = _ref[_i];
       select.append("<option>" + example.name + "</option>");
     }
-    select.change(function() {
+    select.change(function(event) {
       var _j, _len1, _ref1, _results;
       _ref1 = window.EXAMPLES;
       _results = [];
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         example = _ref1[_j];
-        if (example.name === $(this).val()) {
-          $('#template').val(example.template);
-          _results.push($('#data').val(example.data));
+        if (example.name === $(event.currentTarget).val()) {
+          template.setValue(example.template);
+          template.gotoLine(1);
+          template.clearSelection();
+          template.getSession().setScrollTop(0);
+          data.setValue(example.data);
+          data.gotoLine(1);
+          data.clearSelection();
+          data.getSession().setScrollTop(0);
+          jst.setValue('');
+          cst.setValue('');
+          result.setValue('');
+          $('#compiled').addClass('hidden');
+          _results.push($('#output').addClass('hidden'));
         } else {
           _results.push(void 0);
         }
@@ -27,8 +79,11 @@
     select.trigger('change');
     $('.hamlcoffee-version').append(Compiler.VERSION);
     $('.coffeescript-version').append(CoffeeScript.VERSION + '.');
+    $('a.toggle').click(function() {
+      return $('#compiled').toggleClass('hidden');
+    });
     return $('#render').click(function() {
-      var compiler, data, result, template;
+      var compiler, cstSource, dataSource, hamlcTemplate, html, jstSource;
       try {
         compiler = new Compiler({
           escapeHtml: $('#escapeHtml').is(':checked'),
@@ -38,27 +93,58 @@
           extendScope: $('#extendScope').is(':checked'),
           format: $('#format').val()
         });
-        compiler.parse($('#template').val());
-        try {
-          template = new Function(CoffeeScript.compile(compiler.precompile(), {
-            bare: true
-          }));
-          try {
-            data = CoffeeScript["eval"]($('#data').val());
-            try {
-              result = template.call(data);
-              return $('#result').val(result);
-            } catch (e) {
-              return $('#result').val("Error render template: " + e.message);
-            }
-          } catch (e) {
-            return $('#result').val("Error evaluating data: " + e.message);
-          }
-        } catch (e) {
-          return $('#result').val("Error compiling template: " + e.message + "\n\nCoffeeScript template source code:\n----------------------------------\n" + (compiler.precompile()) + "      ");
-        }
+        compiler.parse(template.getValue());
       } catch (e) {
-        return $('#result').val("Error parsing emplate: " + e);
+        jst.setValue('');
+        cst.setValue('');
+        result.setValue("Error parsing template: " + e);
+        result.clearSelection();
+        $('#output').removeClass('hidden');
+        $('#compiled').addClass('hidden');
+        return;
+      }
+      try {
+        cstSource = compiler.precompile();
+        cst.setValue(cstSource);
+        cst.clearSelection();
+        cst.gotoLine(1);
+        cst.getSession().setScrollTop(0);
+        jstSource = CoffeeScript.compile(cstSource, {
+          bare: true
+        });
+        jst.setValue(jstSource);
+        jst.clearSelection();
+        jst.gotoLine(1);
+        jst.getSession().setScrollTop(0);
+        hamlcTemplate = new Function(jstSource);
+      } catch (e) {
+        jst.setValue('');
+        cst.setValue('');
+        result.setValue("Error compiling template: " + e.message);
+        result.clearSelection();
+        $('#output').removeClass('hidden');
+        $('#compiled').addClass('hidden');
+        return;
+      }
+      try {
+        dataSource = CoffeeScript["eval"](data.getValue());
+      } catch (e) {
+        result.setValue("Error evaluating data: " + e.message);
+        result.clearSelection();
+        $('#output').removeClass('hidden');
+        $('#compiled').removeClass('hidden');
+        return;
+      }
+      try {
+        html = hamlcTemplate.call(dataSource);
+        result.setValue(html);
+        result.clearSelection();
+        return $('#output').removeClass('hidden');
+      } catch (e) {
+        result.setValue("Error render template: " + e.message);
+        result.clearSelection();
+        $('#output').removeClass('hidden');
+        return $('#compiled').removeClass('hidden');
       }
     });
   });

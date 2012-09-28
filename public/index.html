@@ -8,13 +8,13 @@
     <meta charset='Try Haml Coffee Online in your Browser' name='description' />
     <meta charset='Haml, CoffeeScript, Template, JavaScript, JST' name='keywords' />
     <meta charset='Michael Kessler' name='author' />
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js'></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.1/coffee-script.min.js'></script>
-    <script src='https://raw.github.com/netzpirat/haml-coffee/master/dist/compiler/hamlcoffee.min.js'></script>
-    <script src='/javascripts/application.js'></script>
-    <link href='/stylesheets/application.css' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+    <script src='//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.1/coffee-script.min.js'></script>
+    <script src='//raw.github.com/netzpirat/haml-coffee/master/dist/compiler/hamlcoffee.min.js'></script>
+    <script src='/assets/application.js'></script>
+    <link href='/assets/application.css' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Engagement' rel='stylesheet' type='text/css' />
     <link href='http://haml-coffee-online.herokuapp.com/assets/favicon.ico' rel='shortcut icon' />
     <link href='http://haml-coffee-online.herokuapp.com/assets/favicon.png' rel='icon' type='image/png' />
     <script type='text/javascript'>
@@ -32,9 +32,13 @@
     </script>
   </head>
   <body>
+    <a href='https://github.com/netzpirat/haml-coffee' id='github'>
+      <span>Fork me on GitHub!</span>
+      <span>Haml Coffee rocks!</span>
+    </a>
     <div id='container'>
       <header>
-        <img alt='Haml Coffee Online' height='256px' src='/images/coffee_machine.png' width='256px' />
+        <img alt='Haml Coffee Online' class='animated flipInY' height='256px' src='/images/coffee_machine.png' width='256px' />
         <h1>Haml Coffee Online</h1>
         <p>
           Hi! I'm
@@ -89,7 +93,7 @@
             <label for='extendScope'>Extend scope</label>
           </li>
           <li>
-            <label for='format'>Format</label>
+            <label for='format'>Format:</label>
             <select id='format'>
               <option>html5</option>
               <option>html4</option>
@@ -99,21 +103,35 @@
         </ul>
       </fieldset>
       <div id='input'>
-        <div id='left'>
-          <label for='template'>Template</label>
-          <textarea id='template'></textarea>
+        <div class='left'>
+          <label for='template'>Haml Coffee Template</label>
+          <div id='template'></div>
         </div>
-        <div id='right'>
-          <label for='data'>Data</label>
-          <textarea id='data'></textarea>
+        <div class='right'>
+          <label for='data'>JSON Data</label>
+          <div id='data'></div>
         </div>
-        <button id='render'>Render template</button>
+        <button id='render'>
+          Compile & Render Template
+        </button>
       </div>
-      <div id='output'>
-        <label for='result'>Result</label>
-        <textarea id='result'></textarea>
+      <div class='hidden animated' id='output'>
+        <div class='hidden animated' id='compiled'>
+          <div class='left'>
+            <label for='cst'>Compiled CoffeeScript Template</label>
+            <div id='cst'></div>
+          </div>
+          <div class='right'>
+            <label for='jst'>Compiled JavaScript Template</label>
+            <div id='jst'></div>
+          </div>
+        </div>
+        <a class='toggle' href='#'>Toggle template source code</a>
+        <label for='result'>Resulting HTML</label>
+        <div id='result'></div>
       </div>
       <footer>
+        <img alt='Netzpirat' height='48' src='/images/netzpirat.png' width='48' />
         Haml Coffee is developed by
         <a href='https://mksoft.ch'>Michael Kessler</a>
         (<a href='http://twitter.com/netzpirat/'>@netzpirat</a>)
