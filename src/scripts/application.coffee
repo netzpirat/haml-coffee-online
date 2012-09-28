@@ -75,7 +75,9 @@ $(document).ready ->
   $('.hamlcoffee-version').append(Compiler.VERSION)
   $('.coffeescript-version').append(CoffeeScript.VERSION + '.')
 
-  $('a.toggle').click -> $('#compiled').toggleClass 'hidden'
+  $('a.toggle').click (event) ->
+    $('#compiled').toggleClass 'hidden'
+    event.preventDefalt()
 
   $('#render').click ->
     try

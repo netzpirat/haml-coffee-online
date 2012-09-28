@@ -79,8 +79,9 @@
     select.trigger('change');
     $('.hamlcoffee-version').append(Compiler.VERSION);
     $('.coffeescript-version').append(CoffeeScript.VERSION + '.');
-    $('a.toggle').click(function() {
-      return $('#compiled').toggleClass('hidden');
+    $('a.toggle').click(function(event) {
+      $('#compiled').toggleClass('hidden');
+      return event.preventDefalt();
     });
     return $('#render').click(function() {
       var compiler, cstSource, dataSource, hamlcTemplate, html, jstSource;
