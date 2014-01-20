@@ -1,5 +1,4 @@
 (function() {
-
   $(document).ready(function() {
     var Compiler, cst, data, example, jst, result, select, template, _i, _len, _ref,
       _this = this;
@@ -84,7 +83,7 @@
       return event.preventDefalt();
     });
     return $('#render').click(function() {
-      var compiler, cstSource, dataSource, hamlcTemplate, html, jstSource;
+      var compiler, cstSource, dataSource, e, hamlcTemplate, html, jstSource;
       try {
         compiler = new Compiler({
           escapeHtml: $('#escapeHtml').is(':checked'),
@@ -95,7 +94,8 @@
           format: $('#format').val()
         });
         compiler.parse(template.getValue());
-      } catch (e) {
+      } catch (_error) {
+        e = _error;
         jst.setValue('');
         cst.setValue('');
         result.setValue("Error parsing template: " + e);
@@ -118,7 +118,8 @@
         jst.gotoLine(1);
         jst.getSession().setScrollTop(0);
         hamlcTemplate = new Function(jstSource);
-      } catch (e) {
+      } catch (_error) {
+        e = _error;
         jst.setValue('');
         cst.setValue('');
         result.setValue("Error compiling template: " + e.message);
@@ -129,7 +130,8 @@
       }
       try {
         dataSource = CoffeeScript["eval"](data.getValue());
-      } catch (e) {
+      } catch (_error) {
+        e = _error;
         result.setValue("Error evaluating data: " + e.message);
         result.clearSelection();
         $('#output').removeClass('hidden');
@@ -143,7 +145,8 @@
         result.gotoLine(1);
         result.getSession().setScrollTop(0);
         return $('#output').removeClass('hidden');
-      } catch (e) {
+      } catch (_error) {
+        e = _error;
         result.setValue("Error render template: " + e.message);
         result.clearSelection();
         $('#output').removeClass('hidden');
